@@ -35,12 +35,9 @@ class GonnaWantSeconds(AbstractScraper):
             },
         ).get_text()
         if tt1:
-            tt3 = (int(tt1) * 60) + int(tt2)
+            tt3 = tt1 * 60 + int(tt2)
             tt2 = get_minutes(tt3)
-            if tt3 and (tt2 == 0):
-                total_time = tt3
-            else:
-                total_time = tt2
+            total_time = tt3 if tt3 and (tt2 == 0) else tt2
         elif tt2:
             total_time = tt2
         return total_time
@@ -94,8 +91,8 @@ class GonnaWantSeconds(AbstractScraper):
         instructions = self.soup.findAll(
             "div", {"class": "wprm-recipe-instruction-group"}
         )
-        data = []
         if len(instructions):
+            data = []
             for instruct in instructions:
                 try:
                     header = instruct.find(
@@ -135,4 +132,4 @@ class GonnaWantSeconds(AbstractScraper):
 
     def description(self):
         d = normalize_string(self.soup.find("span", {"style": "display: block;"}).text)
-        return d if d else None
+        return d or None

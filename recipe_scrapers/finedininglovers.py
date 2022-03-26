@@ -18,7 +18,7 @@ class FineDiningLovers(AbstractScraper):
             "div", {"class": "field--name-field-recipe-serving-num"}
         )
 
-        return get_yields("{} servings".format(yields))
+        return get_yields(f"{yields} servings")
 
     def ingredients(self):
         ingredients_parent = self.soup.find("div", {"class": "ingredients-box"})
@@ -45,4 +45,4 @@ class FineDiningLovers(AbstractScraper):
         image_url = image["data-src"].split("?")[0]
         image_base_url = "https://www.finedininglovers.com"
 
-        return "{}{}".format(image_base_url, image_url) if image else None
+        return f"{image_base_url}{image_url}" if image else None

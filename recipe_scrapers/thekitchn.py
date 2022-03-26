@@ -12,7 +12,7 @@ class TheKitchn(AbstractScraper):
 
     def total_time(self):
         elements = self.soup.findAll("p", {"class": "Recipe__timeEntry"})
-        return sum([get_minutes(element) for element in elements])
+        return sum(get_minutes(element) for element in elements)
 
     def yields(self):
         return get_yields(

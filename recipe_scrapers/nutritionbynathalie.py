@@ -48,10 +48,7 @@ class NutritionByNathalie(AbstractScraper):
     def instructions(self):
         title = self.soup.find(text="Directions:").find_parent("p")
 
-        instructions = []
-        for child in title.nextSibling.find_all("li"):
-            instructions.append(child.get_text())
-
+        instructions = [child.get_text() for child in title.nextSibling.find_all("li")]
         return "\n".join(instructions)
 
     def ratings(self):

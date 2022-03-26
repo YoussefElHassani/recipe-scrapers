@@ -20,8 +20,8 @@ class Przepisy(AbstractScraper):
         ingredients = self.soup.findAll("span", {"class": "text-bg-white"})
 
         return [
-            normalize_string(i.get_text()) + " " + normalize_string(j.get_text())
-            for i, j in zip(ingredients[0::2], ingredients[1::2])
+            f'{normalize_string(i.get_text())} {normalize_string(j.get_text())}'
+            for i, j in zip(ingredients[::2], ingredients[1::2])
         ]
 
     def instructions(self):

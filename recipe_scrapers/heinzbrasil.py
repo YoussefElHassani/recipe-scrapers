@@ -20,9 +20,7 @@ class HeinzBrasil(AbstractScraper):
         ingredients = self.soup.findAll("div", {"class": "krRDPIngreListText"})
 
         return [
-            normalize_string(
-                "{} {}".format(ingredient["qty"], ingredient["ingredientname"])
-            )
+            normalize_string(f'{ingredient["qty"]} {ingredient["ingredientname"]}')
             for ingredient in ingredients
         ]
 

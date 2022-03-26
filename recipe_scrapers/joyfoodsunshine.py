@@ -25,8 +25,6 @@ class Joyfoodsunshine(AbstractScraper):
             )
         )
 
-        return self.schema.ingredients()
-
     def image(self):
         # span class = wprm-recipe-image find src
         return self.schema.image()

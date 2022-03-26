@@ -39,13 +39,12 @@ class OpenGraphImageFetchPlugin(PluginInterface):
 
             if image:
                 return image
-            else:
-                logger.info(
-                    f"{class_name}.{method_name}() did not manage to find recipe image. OpenGraphImageFetchPlugin will attempt to do its magic."
-                )
-                image = self.soup.find(
-                    "meta", {"property": "og:image", "content": True}
-                )
-                return image.get("content")
+            logger.info(
+                f"{class_name}.{method_name}() did not manage to find recipe image. OpenGraphImageFetchPlugin will attempt to do its magic."
+            )
+            image = self.soup.find(
+                "meta", {"property": "og:image", "content": True}
+            )
+            return image.get("content")
 
         return decorated_method_wrapper

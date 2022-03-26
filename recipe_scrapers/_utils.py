@@ -42,10 +42,7 @@ def get_minutes(element, return_zero_on_not_found=False):
     except Exception:
         pass
 
-    if isinstance(element, str):
-        time_text = element
-    else:
-        time_text = element.get_text()
+    time_text = element if isinstance(element, str) else element.get_text()
     if time_text.startswith("P") and "T" in time_text:
         time_text = time_text.split("T", 2)[1]
     if "-" in time_text:
@@ -62,11 +59,9 @@ def get_minutes(element, return_zero_on_not_found=False):
     matched = TIME_REGEX.search(time_text)
 
     minutes = int(matched.groupdict().get("minutes") or 0)
-    hours_matched = matched.groupdict().get("hours")
-
-    if hours_matched:
+    if hours_matched := matched.groupdict().get("hours"):
         hours_matched = hours_matched.strip()
-        if any([symbol in FRACTIONS.keys() for symbol in hours_matched]):
+        if any(symbol in FRACTIONS.keys() for symbol in hours_matched):
             hours = 0
             for fraction, value in FRACTIONS.items():
                 if fraction in hours_matched:
@@ -99,21 +94,17 @@ def get_yields(element):
     if element is None:
         raise ElementNotFoundInHtml(element)
 
-    if isinstance(element, str):
-        serve_text = element
-    else:
-        serve_text = element.get_text()
-
+    serve_text = element if isinstance(element, str) else element.get_text()
     if SERVE_REGEX_TO.search(serve_text):
         serve_text = serve_text.split(SERVE_REGEX_TO.split(serve_text, 2)[1], 2)[1]
 
     matched = SERVE_REGEX_NUMBER.search(serve_text).groupdict().get("items") or 0
-    servings = "{} serving(s)".format(matched)
+    servings = f"{matched} serving(s)"
 
     if SERVE_REGEX_ITEMS.search(serve_text) is not None:
         # This assumes if object(s), like sandwiches, it is 1 person.
         # Issue: "Makes one 9-inch pie, (realsimple-testcase, gives "9 items")
-        servings = "{} item(s)".format(matched)
+        servings = f"{matched} item(s)"
 
     return servings
 
@@ -144,9 +135,7 @@ def url_path_to_dict(path):
     )
     regex = re.compile(pattern)
     matches = regex.match(path)
-    url_dict = matches.groupdict() if matches is not None else None
-
-    return url_dict
+    return matches.groupdict() if matches is not None else None
 
 
 def get_host_name(url):

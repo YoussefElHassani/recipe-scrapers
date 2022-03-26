@@ -8,7 +8,7 @@ class TestFarmhouseDeliveryScraper(ScraperTest):
 
     @property
     def test_file_name(self):
-        return "{}_2".format(self.scraper_class.__name__.lower())
+        return f"{self.scraper_class.__name__.lower()}_2"
 
     def test_host(self):
         self.assertEqual("recipes.farmhousedelivery.com", self.harvester_class.host())

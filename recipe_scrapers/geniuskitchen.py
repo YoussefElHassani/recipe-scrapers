@@ -32,11 +32,12 @@ class GeniusKitchen(AbstractScraper):
             .findAll("li")
         )
 
-        directions = []
+        directions = [
+            normalize_string(direction.get_text())
+            for direction in raw_directions
+            if "Submit a Correction" not in direction.get_text()
+        ]
 
-        for direction in raw_directions:
-            if "Submit a Correction" not in direction.get_text():
-                directions.append(normalize_string(direction.get_text()))
 
         return "\n".join(directions)
 

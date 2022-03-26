@@ -19,15 +19,11 @@ class GreatBritishChefs(AbstractScraper):
 
     def total_time(self):
         total_time = 0
-        tt1 = self.soup.find("span", {"class": "RecipeAttributes__Time"})
-        if tt1:
+        if tt1 := self.soup.find("span", {"class": "RecipeAttributes__Time"}):
             tt = tt1.find("span", {"class": "header-attribute-text"}).get_text()
             tt3 = normalize_string(tt)
             tt2 = get_minutes(tt3)
-            if tt3 and (tt2 == 0):
-                total_time = tt3
-            else:
-                total_time = tt2
+            total_time = tt3 if tt3 and (tt2 == 0) else tt2
         return total_time
 
     def yields(self):
@@ -45,7 +41,7 @@ class GreatBritishChefs(AbstractScraper):
             if "http:" in src:
                 return src
             else:
-                src = "http:" + src
+                src = f"http:{src}"
         return src if image else None
 
     def ingredients(self):
@@ -74,4 +70,4 @@ class GreatBritishChefs(AbstractScraper):
         d = normalize_string(
             self.soup.find("div", {"class": "RecipeAbstract__Abstract"}).text
         )
-        return d if d else None
+        return d or None

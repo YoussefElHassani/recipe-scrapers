@@ -18,7 +18,7 @@ class MotherThyme(AbstractScraper):
     def yields(self):
         yields = self.soup.find("span", {"class": "wprm-recipe-servings"}).get_text()
 
-        return get_yields("{} servings".format(yields))
+        return get_yields(f"{yields} servings")
 
     def ingredients(self):
         ingredients = self.soup.findAll("li", {"class": "wprm-recipe-ingredient"})

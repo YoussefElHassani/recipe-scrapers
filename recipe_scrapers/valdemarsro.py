@@ -54,14 +54,12 @@ class Valdemarsro(AbstractScraper):
 
     def yields(self):
         yields_element = self.soup.find("i", {"class": "fa-sort"}).parent
-        yields_text = yields_element.getText().strip()
-        return yields_text
+        return yields_element.getText().strip()
 
     def image(self):
         parent_element = self.soup.find("div", {"class": "recipe-image"})
         image_element = parent_element.find(lambda x: not x.has_attr("class"))
-        image_url = image_element["src"]
-        return image_url
+        return image_element["src"]
 
     def ingredients(self):
         ingredient_elements = self.soup.find_all("li", {"itemprop": "recipeIngredient"})
@@ -95,6 +93,4 @@ class Valdemarsro(AbstractScraper):
             p.get_text().strip() for p in description_paragraph_elements
         ]
 
-        description = "\n".join(description_paragraphs)
-
-        return description
+        return "\n".join(description_paragraphs)

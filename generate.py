@@ -165,7 +165,7 @@ class InitScraperState(ScraperState):
             return False
 
     def _import(self, node):
-        if isinstance(node, ast.Module) or isinstance(node, ast.Import):
+        if isinstance(node, (ast.Module, ast.Import)):
             return True
 
         if isinstance(node, ast.ImportFrom):

@@ -32,23 +32,21 @@ class TestKitchnScraper(ScraperTest):
 
     def test_ingredients(self):
         self.assertSetEqual(
-            set(
-                [
-                    "1 large shallot, finely chopped",
-                    "2 cups shredded part-skim mozzarella cheese, divided",
-                    "4 cloves garlic, minced",
-                    "12 ounces lean ground beef",
-                    "1/2 cup finely grated Parmesan cheese, divided",
-                    "1 teaspoon kosher salt",
-                    "Cooking spray",
-                    "1 large egg, lightly beaten",
-                    "1/2 cup chopped fresh parsley leaves, divided",
-                    "2 tablespoons olive oil",
-                    "3 cups marinara sauce, divided",
-                    "14 dried manicotti pasta tubes (8 ounces)",
-                    "1 (15 to 16-ounce) container full-fat ricotta cheese",
-                ]
-            ),
+            {
+                "1 large shallot, finely chopped",
+                "2 cups shredded part-skim mozzarella cheese, divided",
+                "4 cloves garlic, minced",
+                "12 ounces lean ground beef",
+                "1/2 cup finely grated Parmesan cheese, divided",
+                "1 teaspoon kosher salt",
+                "Cooking spray",
+                "1 large egg, lightly beaten",
+                "1/2 cup chopped fresh parsley leaves, divided",
+                "2 tablespoons olive oil",
+                "3 cups marinara sauce, divided",
+                "14 dried manicotti pasta tubes (8 ounces)",
+                "1 (15 to 16-ounce) container full-fat ricotta cheese",
+            },
             set(self.harvester_class.ingredients()),
         )
 

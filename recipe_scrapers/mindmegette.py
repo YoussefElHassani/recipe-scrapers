@@ -39,7 +39,7 @@ class Mindmegette(AbstractScraper):
             ingredient_name = (
                 ingredient.find("span", {"class": "ingredient-name"}).get_text().strip()
             )
-            ingredients.append((amount_unit + " " + ingredient_name).strip())
+            ingredients.append(f'{amount_unit} {ingredient_name}'.strip())
 
         return ingredients
 

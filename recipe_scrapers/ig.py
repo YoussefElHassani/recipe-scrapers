@@ -12,17 +12,19 @@ class IG(AbstractScraper):
 
     def total_time(self):
         container = self.soup.find("div", {"class": "box-info-preparacao"})
-        if not container:
-            return None
-        else:
-            return int(container.find("span", {"class": "valor"}).get_text())
+        return (
+            int(container.find("span", {"class": "valor"}).get_text())
+            if container
+            else None
+        )
 
     def yields(self):
         container = self.soup.find("div", {"class": "box-info-rendimento"})
-        if not container:
-            return None
-        else:
-            return get_yields(container.find("span", {"class": "valor"}).get_text())
+        return (
+            get_yields(container.find("span", {"class": "valor"}).get_text())
+            if container
+            else None
+        )
 
     def image(self):
         container = self.soup.find("div", {"class": "box-img-receita"})

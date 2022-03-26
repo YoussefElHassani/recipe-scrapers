@@ -16,11 +16,7 @@ class ScraperTest(unittest.TestCase):
             "RECIPE_SCRAPERS_SETTINGS"
         ] = "tests.test_data.test_settings_module.test_settings"
 
-        test_file_name = (
-            self.test_file_name
-            if self.test_file_name
-            else self.scraper_class.__name__.lower()
-        )
+        test_file_name = self.test_file_name or self.scraper_class.__name__.lower()
         with open(
             f"tests/test_data/{test_file_name}.{self.test_file_extension}",
             encoding="utf-8",

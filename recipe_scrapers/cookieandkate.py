@@ -18,7 +18,7 @@ class CookieAndKate(AbstractScraper):
     def yields(self):
         yields = self.soup.find("span", {"class": "tasty-recipes-yield"}).get_text()
 
-        return get_yields("{} servings".format(yields))
+        return get_yields(f"{yields} servings")
 
     def ingredients(self):
         ingredients = self.soup.find(
