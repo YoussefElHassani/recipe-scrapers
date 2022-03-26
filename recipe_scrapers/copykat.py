@@ -38,4 +38,4 @@ class CopyKat(AbstractScraper):
     def description(self):
         d = normalize_string(self.soup.find("span", {"style": "display: block;"}).text)
 
-        return d if d else None
+        return d or None

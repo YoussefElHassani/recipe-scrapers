@@ -25,7 +25,7 @@ class FitMenCook(AbstractScraper):
                     if word.isdigit():
                         yields = word
 
-        return get_yields("{} servings".format(yields))
+        return get_yields(f"{yields} servings")
 
     def ingredients(self):
         ingredients_parent = self.soup.find("div", {"class": "recipe-ingredients"})

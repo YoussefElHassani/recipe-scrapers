@@ -46,10 +46,7 @@ class TheHappyFoodie(AbstractScraper):
             for ingredient in ingredients
         ]
 
-        return [
-            normalize_string("{} {}".format(amount, name))
-            for amount, name in ingredients
-        ]
+        return [normalize_string(f"{amount} {name}") for amount, name in ingredients]
 
     def instructions(self):
         instructions = self.soup.find("div", {"class": "recipe__instructions"}).findAll(

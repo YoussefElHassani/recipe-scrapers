@@ -23,8 +23,9 @@ class TasteOfHome(AbstractScraper):
         return self.schema.ingredients()
 
     def instructions(self):
-        instructions = self.soup.findAll("li", {"class": "recipe-directions__item"})
-        if instructions:
+        if instructions := self.soup.findAll(
+            "li", {"class": "recipe-directions__item"}
+        ):
             return "\n".join(
                 [
                     normalize_string(instruction.get_text())

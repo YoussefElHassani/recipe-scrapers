@@ -11,14 +11,9 @@ class ThePioneerWoman(AbstractScraper):
         return self.soup.find("h3", {"class": "recipe-title"}).get_text()
 
     def total_time(self):
-        return sum(
-            [
-                get_minutes(dd)
-                for dd in self.soup.find(
-                    "div", {"class": "recipe-summary-time"}
-                ).findAll("dd")
-            ]
-        )
+        return sum(get_minutes(dd) for dd in self.soup.find(
+                        "div", {"class": "recipe-summary-time"}
+                    ).findAll("dd"))
 
     def yields(self):
         return get_yields(self.soup.find("span", {"itemprop": "recipeYield"}))

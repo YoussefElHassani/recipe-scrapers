@@ -24,8 +24,7 @@ class Woop(AbstractScraper):
     def total_time(self):
         div = self.soup.findAll("div", {"class": "cook-time"})[0]
         p = div.findChildren("p")[0]
-        value = get_minutes(p)
-        return value
+        return get_minutes(p)
 
     def instructions(self):
         div = self.soup.findAll("div", {"class": "cooking-instructions"})[0]

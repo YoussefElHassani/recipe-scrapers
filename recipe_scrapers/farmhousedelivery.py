@@ -75,17 +75,17 @@ class FarmhouseDelivery(AbstractScraper):
         # Style 2
         instructions_marker = self.soup.find("p", text=re.compile(r"Instructions"))
         if instructions_marker is not None:
-            instructions = []
             instructions_marker_siblings = instructions_marker.next_siblings
-            for instructions_marker_sibling in instructions_marker_siblings:
+            instructions = [
+                normalize_string(instructions_marker_sibling.get_text())
+                for instructions_marker_sibling in instructions_marker_siblings
                 if (
                     isinstance(instructions_marker_sibling, Tag)
                     and instructions_marker_sibling.name == "p"
                     and instructions_marker_sibling.get_text(strip=True) != ""
-                ):
-                    instructions.append(
-                        normalize_string(instructions_marker_sibling.get_text())
-                    )
+                )
+            ]
+
             return instructions
 
         return None

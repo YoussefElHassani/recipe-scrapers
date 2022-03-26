@@ -48,11 +48,10 @@ class SweetPeasAndSaffron(AbstractScraper):
         ingredient_name = self.soup.find_all(
             "span", {"class": "wprm-recipe-ingredient-name"}
         )
-        ingredients = [
+        return [
             " ".join([n.text, a.text, u.text])
             for a, u, n in zip(ingredient_amount, ingredient_unit, ingredient_name)
         ]
-        return ingredients
 
     def ratings(self):
         return self.soup.find("span", {"class": "wprm-recipe-rating-average"}).text

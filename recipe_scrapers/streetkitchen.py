@@ -21,23 +21,20 @@ class StreetKitchen(AbstractScraper):
         )
 
     def ingredients(self):
-        ingredients = []
         ingredient_group = self.soup.find("div", {"class": "ingredient-group"}).findAll(
             "dd"
         )
 
-        for ingredient in ingredient_group:
-            ingredients.append(normalize_string(ingredient.get_text()).strip())
-
-        return ingredients
+        return [
+            normalize_string(ingredient.get_text()).strip()
+            for ingredient in ingredient_group
+        ]
 
     def instructions(self):
         instructions = self.soup.find("div", {"class": "the-content-div"}).findAll("p")[
             :-1
         ]  # the last paragraph is advertisement, not instructions
-        instructions_arr = []
-        for instruction in instructions:
-            instructions_arr.append(instruction.get_text())
+        instructions_arr = [instruction.get_text() for instruction in instructions]
         return "\n".join(instructions_arr)
 
     def yields(self):

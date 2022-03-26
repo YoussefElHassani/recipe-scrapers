@@ -5,9 +5,7 @@ from ._utils import change_keys
 
 
 def fix_json_ld_property_keys(k):
-    if k == "ItemListElement":
-        return "itemListElement"
-    return k
+    return "itemListElement" if k == "ItemListElement" else k
 
 
 class TineNo(AbstractScraper):

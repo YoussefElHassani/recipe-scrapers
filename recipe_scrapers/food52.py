@@ -12,11 +12,11 @@ class Food52(AbstractScraper):
 
     def total_time(self):
         ul = self.soup.find("ul", {"class": "recipe__details"})
-        total = 0
-        for li in ul.find_all("li"):
-            if li.span.get_text().lower() in ["prep time", "cook time"]:
-                total += get_minutes(list(li.children)[2].strip())
-        return total
+        return sum(
+            get_minutes(list(li.children)[2].strip())
+            for li in ul.find_all("li")
+            if li.span.get_text().lower() in ["prep time", "cook time"]
+        )
 
     def yields(self):
         return self.schema.yields()

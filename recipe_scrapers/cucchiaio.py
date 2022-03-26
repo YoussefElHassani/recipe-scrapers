@@ -14,14 +14,12 @@ class Cucchiaio(AbstractScraper):
         return self.schema.title()
 
     def total_time(self):
-        block = self.soup.find("div", {"class": "scheda-ricetta-new"})
-        if block:
+        if block := self.soup.find("div", {"class": "scheda-ricetta-new"}):
             return sum(map(get_minutes, block.findAll("tr")))
         return 0
 
     def yields(self):
-        header = self.soup.find("td", text="PORZIONI")
-        if header:
+        if header := self.soup.find("td", text="PORZIONI"):
             value = header.find_next("td")
             return get_yields(value)
         return None

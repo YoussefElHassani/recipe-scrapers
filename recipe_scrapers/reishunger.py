@@ -38,6 +38,5 @@ class Reishunger(AbstractScraper):
             "div", {"class": "nrating"}
         )
         if block:
-            cnt = len(block.findAll("span", {"class": "fa-star"}))
-            return cnt
+            return len(block.findAll("span", {"class": "fa-star"}))
         return block

@@ -15,21 +15,21 @@ class Vegolosi(AbstractScraper):
             "span", {"class": "tasty-recipes-prep-time"}
         )
 
-        return sum([get_minutes(element) for element in possible_time_info_elements])
+        return sum(get_minutes(element) for element in possible_time_info_elements)
 
     def cooking_time(self):
         possible_time_info_elements = self.soup.findAll(
             "span", {"class": "tasty-recipes-cook-time"}
         )
 
-        return sum([get_minutes(element) for element in possible_time_info_elements])
+        return sum(get_minutes(element) for element in possible_time_info_elements)
 
     def total_time(self):
         possible_time_info_elements = self.soup.findAll(
             "span", {"class": "tasty-recipes-total-time"}
         )
 
-        return sum([get_minutes(element) for element in possible_time_info_elements])
+        return sum(get_minutes(element) for element in possible_time_info_elements)
 
     def yields(self):
         possible_yields_info_elements = self.soup.findAll(

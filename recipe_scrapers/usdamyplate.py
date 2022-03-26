@@ -16,13 +16,9 @@ class USDAMyPlate(AbstractScraper):
             "div", {"class": "mp-recipe-full__overview desktop:grid-col-5 grid-row"}
         )
 
-        minutes = 0
-        for span in full_detail.findAll(
+        minutes = sum(get_minutes(span) for span in full_detail.findAll(
             "span", {"class": "mp-recipe-full__detail--data"}
-        ):
-            if "minute" in span.get_text().lower() or "hour" in span.get_text().lower():
-                minutes += get_minutes(span)
-
+        ) if "minute" in span.get_text().lower() or "hour" in span.get_text().lower())
         if minutes == 0:
             return None
 
@@ -34,11 +30,9 @@ class USDAMyPlate(AbstractScraper):
         )
 
         spans = full_detail.findAll("span")
-        i = 0
-        for span in spans:
+        for i, span in enumerate(spans):
             if "Makes:" in span:
                 return get_yields(spans[i + 1])
-            i += 1
 
     def image(self):
         div = self.soup.find(

@@ -32,8 +32,7 @@ class KingArthur(AbstractScraper):
         """
         schema_instructions = self.schema.instructions()
         soup = BeautifulSoup(schema_instructions, "html.parser")
-        instruction_elms = soup.findAll("p")
-        if instruction_elms:
+        if instruction_elms := soup.findAll("p"):
             return "\n".join(
                 [normalize_string(elm.get_text()) for elm in instruction_elms]
             )

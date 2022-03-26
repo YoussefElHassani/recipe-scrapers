@@ -386,12 +386,11 @@ def scrape_me(url_path, **options):
     except KeyError:
         if not options.get("wild_mode", False):
             raise WebsiteNotImplementedError(host_name)
-        else:
-            options.pop("wild_mode")
-            wild_scraper = SchemaScraperFactory.generate(url_path, **options)
-            if not wild_scraper.schema.data:
-                raise NoSchemaFoundInWildMode(url_path)
-            return wild_scraper
+        options.pop("wild_mode")
+        wild_scraper = SchemaScraperFactory.generate(url_path, **options)
+        if not wild_scraper.schema.data:
+            raise NoSchemaFoundInWildMode(url_path)
+        return wild_scraper
 
     return scraper(url_path, **options)
 

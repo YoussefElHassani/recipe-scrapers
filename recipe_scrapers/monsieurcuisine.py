@@ -43,7 +43,7 @@ class MonsieurCuisine(AbstractScraper):
         if not container:
             return None
 
-        return "https://www." + self.host() + container
+        return f"https://www.{self.host()}{container}"
 
     def ingredients(self):
         container = self.soup.find(

@@ -14,7 +14,7 @@ class TwoPeasAndTheirPod(AbstractScraper):
         minutes = self.soup.select_one(".wprm-recipe-total_time").get_text()
         unit = self.soup.select_one(".wprm-recipe-total_time-unit").get_text()
 
-        return get_minutes("{} {}".format(minutes, unit))
+        return get_minutes(f"{minutes} {unit}")
 
     def yields(self):
         return get_yields(

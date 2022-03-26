@@ -20,7 +20,7 @@ class CountryLiving(AbstractScraper):
             "div", {"class": "recipe-details-item yields"}
         ).get_text()
 
-        return get_yields("{} servings".format(yields))
+        return get_yields(f"{yields} servings")
 
     def ingredients(self):
         ingredients = self.soup.findAll("div", {"class": "ingredient-item"})

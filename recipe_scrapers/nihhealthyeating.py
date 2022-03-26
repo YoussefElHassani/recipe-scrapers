@@ -19,7 +19,7 @@ class NIHHealthyEating(AbstractScraper):
         if time_table is None:
             raise ElementNotFoundInHtml("Table with times was not found.")
 
-        return sum([get_minutes(td) for td in time_table.find_all("td")])
+        return sum(get_minutes(td) for td in time_table.find_all("td"))
 
     def yields(self):
         # This content must be present for all recipes on this website.

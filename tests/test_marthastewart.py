@@ -32,17 +32,15 @@ class TestMarthaStewart(ScraperTest):
 
     def test_ingredients(self):
         self.assertSetEqual(
-            set(
-                [
-                    "3 large eggs",
-                    "Coarse salt",
-                    "1/3 cup all-purpose flour",
-                    "3 1/2 cups fresh breadcrumbs",
-                    "1 cup vegetable oil",
-                    "8 thin chicken cutlets (about 1 1/2 pounds total)",
-                    "Lemon wedges, for serving (optional)",
-                ]
-            ),
+            {
+                "3 large eggs",
+                "Coarse salt",
+                "1/3 cup all-purpose flour",
+                "3 1/2 cups fresh breadcrumbs",
+                "1 cup vegetable oil",
+                "8 thin chicken cutlets (about 1 1/2 pounds total)",
+                "Lemon wedges, for serving (optional)",
+            },
             set(self.harvester_class.ingredients()),
         )
 
